@@ -24,8 +24,6 @@ class Stop extends Component {
                 line={l.line}
                 routeName={l.routeName}
                 stopPos={l.stopPos}
-                color={l.color}
-                text={l.text}
                 next={l.next}
                 secondNext={l.secondNext}
                 navigation={this.props.navigation}

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 
 import { colors } from '../../config/styles';
 import { StopCard, dummyStops } from '../presentations/';
+import { GET } from '../../config/api';
 
 class Main extends Component {
   constructor(props) {

@@ -122,5 +122,23 @@ export const dummyLines = [
     text: 'blue',
     next: '11',
     secondNext: '22'
+  },
+  {
+    line: '16',
+    routeName: 'Eketrägatan',
+    stopPos: 'C',
+    color: 'white',
+    text: 'blue',
+    next: '11',
+    secondNext: '22'
+  },
+  {
+    line: '55',
+    routeName: 'Eketrägatan',
+    stopPos: 'C',
+    color: 'white',
+    text: 'blue',
+    next: '11',
+    secondNext: '22'
   }
 ];
