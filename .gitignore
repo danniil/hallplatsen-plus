@@ -57,3 +57,4 @@ buck-out/
 
 # Creds
 src/config/cred.js
+cred.js
