@@ -14,7 +14,6 @@ const MainNav = createStackNavigator(
         title: 'Hållplatsen',
         headerStyle: styles.header,
         headerTitleStyle: styles.title,
-
         headerRight: (
           <Image
             source={dots}
@@ -23,12 +22,12 @@ const MainNav = createStackNavigator(
             onPress={() => null}
           />
         ),
-        headerLeft: <View /> //poor fix to center
+        headerLeft: <View /> //fix to center
       })
     },
     stop: {
       screen: Stop,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: navigation => ({
         title: 'Stop X',
         headerStyle: styles.header,
         headerTitleStyle: styles.title,
@@ -37,7 +36,7 @@ const MainNav = createStackNavigator(
             source={dots}
             style={styles.img}
             color={'white'}
-            onPress={() => null}
+            onPress={() => this.props.navigation.navigate('main')}
           />
         ),
         headerLeft: (
@@ -45,7 +44,7 @@ const MainNav = createStackNavigator(
             source={back}
             style={styles.img}
             color={'white'}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('main')}
           />
         )
       })
@@ -60,13 +59,15 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.green,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    borderColor: colors.green
   },
   title: {
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center',
-    color: 'white'
+    color: 'white',
+    fontSize: 25
   },
   img: {
     height: 24,

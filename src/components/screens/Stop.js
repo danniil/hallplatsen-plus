@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Divider } from 'react-native';
 
 import { colors } from '../../config/styles';
+import { LineCard, dummyLines } from '../presentations/';
 
 class Stop extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { lines: dummyLines };
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text
-          style={styles.header}
-          onPress={() => this.props.navigation.navigate('main')}
-        >
-          Stop X
-        </Text>
+        <ScrollView>
+          {/* //<Divider /> */}
+          {this.state.lines.map((l, i) => {
+            return (
+              <LineCard
+                key={i}
+                index={i}
+                line={l.line}
+                routeName={l.routeName}
+                stopPos={l.stopPos}
+                color={l.color}
+                text={l.text}
+                next={l.next}
+                secondNext={l.secondNext}
+                navigation={this.props.navigation}
+              />
+            );
+          })}
+        </ScrollView>
       </View>
     );
   }
@@ -21,9 +41,8 @@ class Stop extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.green
+    backgroundColor: colors.green,
+    paddingTop: 15
   },
   header: {
     fontSize: 30,

@@ -1,29 +1,69 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 
 import { colors } from '../../config/styles';
+import { StopCard, dummyStops } from '../presentations/';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { search: '', stops: dummyStops };
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text
-          style={styles.header}
-          onPress={() => this.props.navigation.navigate('stop')}
-        >
-          Hållplatsen
-        </Text>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.search}
+            spellCheck={false}
+            autoCorrect={false}
+            returnKeyType={'next'}
+            onChangeText={input => {
+              this.listStops(input);
+              this.setState({ search: input });
+            }}
+            onEndEditing={() => null}
+          />
+        </View>
+        <ScrollView>
+          {this.state.stops.map((l, i) => {
+            return (
+              <StopCard
+                key={i}
+                index={i}
+                stopName={l.stopName}
+                city={l.city}
+                favorite={l.favorite}
+                navigation={this.props.navigation}
+              />
+            );
+          })}
+        </ScrollView>
       </View>
     );
+  }
+
+  listStops(input) {
+    //search stops and display
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: colors.green
+  },
+  searchContainer: {
+    height: 60,
+    marginHorizontal: 15,
+    justifyContent: 'center'
+  },
+  search: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 15
   },
   header: {
     fontSize: 30,
