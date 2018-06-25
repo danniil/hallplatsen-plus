@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { Main } from './components/screens';
+import { Provider } from 'react-redux';
+
 import MainNav from './navigator/appnavigator';
+import store from './store';
 
 class App extends Component {
   render() {
-    return <MainNav />;
+    return (
+      <Provider store={store}>
+        <MainNav />
+      </Provider>
+    );
   }
 }
 

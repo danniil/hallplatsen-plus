@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 
 import { colors } from '../../config/styles';
 import { StopCard, dummyStops } from '../presentations/';
-import { GET } from '../../config/api';
+import { getLocations } from '../../config/api';
 
 class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { search: '', stops: dummyStops };
+    this.state = { search: '', stops: dummyStops, return: '' };
   }
 
   render() {
@@ -18,14 +18,15 @@ class Main extends Component {
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.search}
+            placeholder={this.state.return}
             spellCheck={false}
             autoCorrect={false}
             returnKeyType={'next'}
             onChangeText={input => {
-              this.listStops(input);
+              //this.listStops(input);
               this.setState({ search: input });
             }}
-            onEndEditing={() => null}
+            onEndEditing={input => this.listStops(input)}
           />
         </View>
         <ScrollView>
@@ -34,9 +35,9 @@ class Main extends Component {
               <StopCard
                 key={i}
                 index={i}
-                stopName={l.stopName}
-                city={l.city}
-                favorite={l.favorite}
+                stopName={l.name}
+                city={'hej'}
+                favorite={true}
                 navigation={this.props.navigation}
               />
             );
@@ -47,7 +48,16 @@ class Main extends Component {
   }
 
   listStops(input) {
-    //search stops and display
+    getLocations(input)
+      .then(res => {
+        let { LocationList } = res;
+        let { StopLocation } = LocationList;
+        console.log(res);
+        this.setState({ stops: StopLocation });
+      })
+      .catch(err => {
+        alert(err);
+      });
   }
 }
 
