@@ -1,17 +1,26 @@
 import {
   FETCHING_STOPS_INITIATED,
-  FETCHING_STOPS_FINISHED
+  FETCHING_STOPS_FINISHED,
+  FETCHING_STOPS_RECEIVED
 } from '../actions/types';
 
-const initialState = {};
+const initialState = {
+  stops: [],
+  isLoading: false
+};
 
-export default function stopsReducer(state = initialState, action) {
+const stopsReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case FETCHING_STOPS_INITIATED:
-      return state;
+      return { ...state, isLoading: true };
+    case FETCHING_STOPS_RECEIVED:
+      return { ...state, stops: state.stops.concat(action.payload) };
     case FETCHING_STOPS_FINISHED:
-      return state;
+      return { ...state, isLoading: false };
     default:
       return state;
   }
-}
+};
+
+export default stopsReducer;

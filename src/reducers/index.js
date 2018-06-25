@@ -5,9 +5,9 @@ import locationReducer from './locationReducer';
 import stopsReducer from './stopsReducer';
 
 const rootReducer = combineReducers({
-  departureReducer,
-  locationReducer,
-  stopsReducer
+  departure: departureReducer,
+  location: locationReducer,
+  stops: stopsReducer
 });
 
 export default rootReducer;

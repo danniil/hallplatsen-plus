@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Divider } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 
 import { colors } from '../../config/styles';
 import { LineCard, dummyLines } from '../presentations/';
+import { addSingleStop, fetchSearchStops } from '../../actions';
 
 class Stop extends Component {
   constructor(props) {
@@ -51,4 +53,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Stop;
+const mapStateToProps = state => {
+  return {
+    stops: state.stops.stops,
+    loading: state.stops.isLoading
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchSearchStops,
+    addSingleStop
+  }
+)(Stop);
